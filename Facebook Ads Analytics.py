@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[4]:
+# In[1]:
 
 
 import numpy as np
@@ -10,13 +7,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-# In[5]:
+# In[2]:
 
 
 fad = pd.read_csv("facebook_ads_data.csv")
 
 
-# In[6]:
+# In[3]:
 
 
 fad_2021 = fad[fad['ad_date'].str.contains('2021', case=False, na=False)]
@@ -24,7 +21,7 @@ fad_group_date = fad_2021.groupby('ad_date')
 fad_date_indicators = fad_group_date['total_spend', 'total_value'].sum()
 
 
-# In[7]:
+# In[4]:
 
 
 plt.figure(figsize=(12, 6))
@@ -39,14 +36,14 @@ plt.tight_layout()
 plt.show()
 
 
-# In[8]:
+# In[5]:
 
 
 fad_date_indicators['romi'] = (fad_date_indicators['total_value'] - fad_date_indicators['total_spend']) / fad_date_indicators['total_spend']
 fad_date_indicators.dropna(inplace=True)
 
 
-# In[10]:
+# In[6]:
 
 
 plt.figure(figsize=(12, 6))
@@ -61,7 +58,7 @@ plt.tight_layout()
 plt.show()
 
 
-# In[11]:
+# In[7]:
 
 
 window_size = 30
@@ -69,7 +66,7 @@ fad_date_indicators['mean_spend'] = fad_date_indicators['total_spend'].rolling(w
 fad_date_indicators['mean_romi'] = fad_date_indicators['romi'].rolling(window=window_size).mean()
 
 
-# In[12]:
+# In[8]:
 
 
 plt.figure(figsize=(12, 6))
@@ -99,14 +96,14 @@ plt.tight_layout()
 plt.show()
 
 
-# In[13]:
+# In[9]:
 
 
 fad_group_campaign = fad.groupby('campaign_name')
 fad_campaign_indicators = fad_group_campaign['total_spend', 'total_value'].sum()
 
 
-# In[14]:
+# In[10]:
 
 
 plt.figure(figsize=(12, 6))
@@ -117,13 +114,13 @@ plt.tight_layout()
 plt.show()
 
 
-# In[15]:
+# In[11]:
 
 
 fad_campaign_indicators['romi'] = (fad_campaign_indicators['total_value'] - fad_campaign_indicators['total_spend']) / fad_campaign_indicators['total_spend']
 
 
-# In[16]:
+# In[12]:
 
 
 plt.figure(figsize=(12, 6))
@@ -134,13 +131,13 @@ plt.tight_layout()
 plt.show()
 
 
-# In[17]:
+# In[13]:
 
 
 fad['Romi']=fad['romi']-1
 
 
-# In[18]:
+# In[14]:
 
 
 plt.figure(figsize=(12, 6))
@@ -152,7 +149,7 @@ plt.tight_layout()
 plt.show()
 
 
-# In[19]:
+# In[15]:
 
 
 plt.figure(figsize=(12, 6))
@@ -164,13 +161,13 @@ plt.tight_layout()
 plt.show()
 
 
-# In[20]:
+# In[16]:
 
 
 correlation_matrix = fad.iloc[:,:10].corr()
 
 
-# In[22]:
+# In[17]:
 
 
 plt.figure(figsize=(12, 8))
@@ -179,7 +176,7 @@ plt.title('Correlation heat map')
 plt.show()
 
 
-# In[23]:
+# In[18]:
 
 
 correlation_values = correlation_matrix.unstack().sort_values(ascending=False)
@@ -190,7 +187,7 @@ min_corr_indices = correlation_values[correlation_values == min_corr].index
 max_corr_indices[0], min_corr_indices[0]
 
 
-# In[24]:
+# In[19]:
 
 
 total_value_corr = correlation_matrix['total_value'].drop('total_value')
@@ -198,7 +195,7 @@ highest_corr_feature = total_value_corr.idxmax()
 highest_corr_feature
 
 
-# In[25]:
+# In[20]:
 
 
 sns.lmplot(x='total_spend', y='total_value', data=fad)
@@ -208,10 +205,3 @@ plt.ylabel('Total value')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
-
-
-# In[ ]:
-
-
-
-
