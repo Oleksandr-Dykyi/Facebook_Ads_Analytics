@@ -13,4 +13,4 @@ I began by loading the statistics of Facebook advertising campaigns into a Panda
 6. Presented the relationship between "total_spend" and "total_value" through a dot plot with linear regression, utilizing the lmplot function.
 
 #### Skills:
-Python, NumPy, Pandas, Matplotlib, Seaborn, Jupyter Notebook
+Data Analysis · Python (Programming Language) · NumPy · Pandas (Software) · Matplotlib · Seaborn · Jupyter · Data Visualization · Regression Analysis · Mathematical Statistics
